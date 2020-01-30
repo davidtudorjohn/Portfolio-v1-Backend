@@ -9,7 +9,9 @@ router.post("/register", async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
   console.log(error);
 
-  const emailExists = await User.findOne({ email: req.body.email });
+  const emailExists = await User.findOne({
+    email: req.body.email.toLowerCase()
+  });
   if (emailExists) return res.status(400).send("Email already exists.");
 
   console.log(emailExists);
@@ -20,7 +22,7 @@ router.post("/register", async (req, res) => {
 
   const user = new User({
     name: req.body.name,
-    email: req.body.email,
+    email: req.body.email.toLowerCase(),
     password: hashedPass
   });
   console.log(user);
@@ -39,7 +41,7 @@ router.post("/login", async (req, res) => {
   const { error } = loginValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const user = await User.findOne({ email: req.body.email });
+  const user = await User.findOne({ email: req.body.email.toLowerCase() });
   if (!user) return res.status(400).send("Email doesn't exist.");
 
   const validPass = await bcrypt.compare(req.body.password, user.password);
@@ -47,7 +49,11 @@ router.post("/login", async (req, res) => {
 
   console.log("Logged in");
 
-  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+  const token = jwt.sign(
+    { _id: user._id },
+    process.env.TOKEN_SECRET
+    {expiresIn: "7d"}
+  );
   console.log(token);
   res.header("auth-token", token).send(token);
 });
