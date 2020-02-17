@@ -1,2 +1,11 @@
 /node_modules
+<<<<<<< HEAD
 .env
+=======
+<<<<<<< HEAD
+.env
+/client
+=======
+.env
+>>>>>>> 7ddabb53b882e2f3d7cdd78f02b42e183e65822a
+>>>>>>> 2e2cc21010c0055122c612eef3c5f14717be8973
