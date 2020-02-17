@@ -4,20 +4,12 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 dotenv.config();
-<<<<<<< HEAD
 const port = process.env.PORT;
-app.use(cors());
-=======
-const port = 5000;
 
->>>>>>> 7ddabb53b882e2f3d7cdd78f02b42e183e65822a
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "*");
   res.header("Access-Control-Expose-Headers", "auth-token");
-<<<<<<< HEAD
-
-=======
   // if (res.header === "OPTIONS") {
   //   res.header(
   //     "Access-Control-Allow-Methods",
@@ -28,7 +20,6 @@ app.use((req, res, next) => {
   //   );
   //   return res.status(200).json({});
   // }
->>>>>>> 7ddabb53b882e2f3d7cdd78f02b42e183e65822a
   next();
 });
 
