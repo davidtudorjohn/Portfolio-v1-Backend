@@ -1,0 +1,25 @@
+services:
+  server:
+    container_name: server
+    restart: always
+    build: .
+    ports:
+      - "5000:5000"
+    volumes: .:/usr/src/app/server
+    links:
+      - mongo
+
+  client:
+    container_name: client
+    restart: always
+    build: ./client
+    ports:
+      - "3000:3000"
+
+    volumes: ./client:/usr/src/app/client
+  mongo:
+    hostname: mongo
+    restart: always
+    image: mongo
+    ports:
+      - "27017:27017"
